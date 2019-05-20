@@ -24,7 +24,7 @@ dependencies {
 	implementation 'org.postgresql:postgresql:42.2.5.jre7'
 	implementation 'mysql:mysql-connector-java'
 
-	implementation 'uk.ac.ebi.ge:atlas-web-core:1.0.0-SNAPSHOT'
+	implementation 'uk.ac.ebi.ge:atlas-web-single-cell:1.0.0-SNAPSHOT'
 	
 	implementation 'org.eclipse.jdt:org.eclipse.jdt.annotation:2.2.200'
 

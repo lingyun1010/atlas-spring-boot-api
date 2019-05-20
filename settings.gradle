@@ -4,4 +4,4 @@ pluginManagement {
 	}
 }
 rootProject.name = 'demo'
-includeBuild '../atlas-web-core'
+includeBuild '../atlas-web-single-cell'
