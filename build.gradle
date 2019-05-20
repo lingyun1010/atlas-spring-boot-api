@@ -5,7 +5,7 @@ plugins {
 
 apply plugin: 'io.spring.dependency-management'
 
-group = 'uk.ac.ebi.atlas'
+group = 'uk.ac.ebi.atlas.springboot'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
@@ -18,24 +18,7 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.boot:spring-boot-starter-data-solr'
-	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
-	implementation 'org.springframework:spring-jdbc:5.1.5.RELEASE'
-	implementation 'org.postgresql:postgresql:42.2.5.jre7'
-	implementation 'mysql:mysql-connector-java'
-
 	implementation 'uk.ac.ebi.ge:atlas-web-single-cell:1.0.0-SNAPSHOT'
-	
-	implementation 'org.eclipse.jdt:org.eclipse.jdt.annotation:2.2.200'
-
-	implementation 'com.google.guava:guava:27.1-jre'
-	implementation 'com.google.code.gson:gson:2.8.5'
-	implementation 'com.jayway.jsonpath:json-path:2.4.0'
-
 	implementation 'javax.inject:javax.inject:1'
 
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.junit.jupiter:junit-jupiter-params:5.4.1'
-	testImplementation 'org.mockito:mockito-core:2.25.1'
-	testImplementation 'org.mockito:mockito-junit-jupiter:2.25.1'
 }
