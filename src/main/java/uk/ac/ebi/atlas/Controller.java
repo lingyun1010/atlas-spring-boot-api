@@ -26,6 +26,6 @@ public class Controller {
   @ResponseStatus(HttpStatus.OK)
   @ResponseBody
   public String getExperimentsListFromSingleCell() {
-    return experimentsListController.getExperimentsListAPI();
+    return experimentsListController.getExperimentsList();
   }
 }

@@ -9,14 +9,28 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+
+@RestController
+@Configuration
 @EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
-@SpringBootApplication
+@ComponentScan
+
 public class DemoApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
 	}
+
+	@RequestMapping("/")
+	public String index() {
+		return "Hello to you, world";
+	}
+
 
 	@Bean
 	@Autowired
