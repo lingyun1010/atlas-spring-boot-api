@@ -49,3 +49,44 @@ docker {
 	copySpec.from(tasks.unpack.outputs).into("dependency")
 	buildArgs(['DEPENDENCY': "dependency"])
 }
+
+apply from: "build-profiles/profile-dev.gradle"
+
+processResources {
+	from('src/main/resources')
+
+	filesMatching(['*.properties']) {
+		expand(
+				jdbcUrl: jdbcUrl,
+				jdbcUsername: jdbcUsername,
+				jdbcPassword: jdbcPassword,
+				dataFilesLocation: dataFilesLocation,
+				projectBuildDirectory: buildDir,
+				testLogs: testLogs,
+				zkHost: zkHost,
+				zkPort: zkPort,
+				solrHost: solrHost,
+				solrPort: solrPort
+
+		)
+	}
+}
+
+processTestResources {
+	from('src/main/resources')
+
+	filesMatching(['*.properties']) {
+		expand(
+				jdbcUrl: jdbcUrl,
+				jdbcUsername: jdbcUsername,
+				jdbcPassword: jdbcPassword,
+				dataFilesLocation: dataFilesLocation,
+				projectBuildDirectory: buildDir,
+				testLogs: testLogs,
+				zkHost: zkHost,
+				zkPort: zkPort,
+				solrHost: solrHost,
+				solrPort: solrPort
+		)
+	}
+}

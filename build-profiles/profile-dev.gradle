@@ -1,0 +1,27 @@
+def getLocalIPv4() {
+    def ip4s = []
+    NetworkInterface.getNetworkInterfaces()
+            .findAll { it.isUp() && !it.isLoopback() && !it.isVirtual() }
+            .each {
+                it.getInetAddresses()
+                        .findAll { !it.isLoopbackAddress() && it instanceof Inet4Address }
+                        .each { ip4s << it }
+            }
+    return ip4s.toString().substring(1, ip4s.toString().length()-1)
+}
+
+ext.buildEnvironment = 'dev'
+
+ext.dataFilesLocation = System.properties['user.home'] + '/ATLAS3.TEST/integration-test-data'
+
+ext.jdbcUrl = 'jdbc:postgresql:/' + getLocalIPv4() + ':5432/gxpatlasloc'
+ext.jdbcUsername = 'atlas3dev'
+ext.jdbcPassword = 'atlas3dev'
+
+ext.zkHost = 'localhost'
+ext.zkPort = 2181
+ext.solrHost = 'localhost'
+ext.solrPort = 8983
+
+ext.testLogs = 'STDOUT'
+
