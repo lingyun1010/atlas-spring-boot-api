@@ -3,5 +3,5 @@ pluginManagement {
 		gradlePluginPortal()
 	}
 }
-rootProject.name = 'demo'
+rootProject.name = 'atlas-spring-boot-api'
 includeBuild '../atlas-web-core'

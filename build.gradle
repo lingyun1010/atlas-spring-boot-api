@@ -15,12 +15,12 @@ plugins {
 	id 'java'
 }
 
-apply plugin: 'war'
+//apply plugin: 'war'
 apply plugin: 'com.palantir.docker'
 apply plugin: 'io.spring.dependency-management'
 
 
-group = 'uk.ac.ebi.ge'
+group = 'lingyun1010'
 version = '0.0.1'
 
 sourceCompatibility = '11'
@@ -39,12 +39,13 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 	implementation 'mysql:mysql-connector-java'
-
+	compile 'org.apache.tiles:tiles-jsp:3.0.5'
+	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'uk.ac.ebi.ge:atlas-web-core:1.0.0-SNAPSHOT'
 	implementation 'javax.inject:javax.inject:1'
 	implementation 'org.springframework.boot:spring-boot-starter-data-solr'
-	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+	implementation 'org.springframework.boot:spring-boot-starter-tomcat'
 	implementation 'com.google.guava:guava:27.1-jre'
 	implementation 'org.springframework:spring-jdbc:5.1.5.RELEASE'
 	implementation 'org.postgresql:postgresql:42.2.5.jre7'
@@ -56,54 +57,53 @@ dependencies {
 }
 
 task unpack(type: Copy) {
-	dependsOn bootWar
-	from(zipTree(tasks.bootWar.outputs.files.singleFile))
+	dependsOn bootJar
+	from(zipTree(tasks.bootJar.outputs.files.singleFile))
 	into("build/dependency")
 }
 
 docker {
-	name "${project.group}/atlas"
+	name "${project.group}/springbootapi"
 	copySpec.from(tasks.unpack.outputs).into("dependency")
 	buildArgs(['DEPENDENCY': "dependency"])
 }
 
 apply from: "build-profiles/profile-dev.gradle"
-
-processResources {
-	from('src/main/resources')
-
-	filesMatching(['*.properties']) {
-		expand(
-//				jdbcUrl: jdbcUrl,
-				jdbcUsername: jdbcUsername,
-				jdbcPassword: jdbcPassword,
-				dataFilesLocation: dataFilesLocation,
-				projectBuildDirectory: buildDir,
-				testLogs: testLogs,
-				zkHost: zkHost,
-				zkPort: zkPort,
-				solrHost: solrHost,
-				solrPort: solrPort
-
-		)
-	}
-}
-
-processTestResources {
-	from('src/main/resources')
-
-	filesMatching(['*.properties']) {
-		expand(
-//				jdbcUrl: jdbcUrl,
-				jdbcUsername: jdbcUsername,
-				jdbcPassword: jdbcPassword,
-				dataFilesLocation: dataFilesLocation,
-				projectBuildDirectory: buildDir,
-				testLogs: testLogs,
-				zkHost: zkHost,
-				zkPort: zkPort,
-				solrHost: solrHost,
-				solrPort: solrPort
-		)
-	}
-}
+//
+//processResources {
+//	from('src/main/resources')
+//
+//	filesMatching(['*.properties']) {
+//		expand(
+//
+//				jdbcUsername: jdbcUsername,
+//				jdbcPassword: jdbcPassword,
+//				dataFilesLocation: dataFilesLocation,
+//				projectBuildDirectory: buildDir,
+//				testLogs: testLogs,
+//				zkHost: zkHost,
+//				zkPort: zkPort,
+//				solrHost: solrHost,
+//				solrPort: solrPort
+//
+//		)
+//	}
+//}
+//
+//processTestResources {
+//	from('src/main/resources')
+//
+//	filesMatching(['*.properties']) {
+//		expand(
+//				jdbcUsername: jdbcUsername,
+//				jdbcPassword: jdbcPassword,
+//				dataFilesLocation: dataFilesLocation,
+//				projectBuildDirectory: buildDir,
+//				testLogs: testLogs,
+//				zkHost: zkHost,
+//				zkPort: zkPort,
+//				solrHost: solrHost,
+//				solrPort: solrPort
+//		)
+//	}
+//}
